@@ -1,7 +1,7 @@
 class ExercisesController < ApplicationController
   def index
-    @course = Course.find(params[:course_id])
-    @exercises = @course.exercises
+    @lesson = Lesson.find(params[:lesson_id])
+    @exercises = @lesson.exercises
     render json: @exercises
   end
 
@@ -11,7 +11,7 @@ class ExercisesController < ApplicationController
   end
 
   def create
-    @exercise = Exercise.create!(params.permit(:title, :instructions, :exercise_type, :test_link, :exercise_link, :value, :course_id))
+    @exercise = Exercise.create!(params.permit(:title, :instructions, :exercise_type, :test_link, :exercise_link, :value, :lesson_id))
     render json: @exercise
   end
 
