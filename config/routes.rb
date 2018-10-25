@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users
   resources :courses do
-    resources :exercises
+    resources :lessons do
+      resources :exercises
+    end
   end
 end
