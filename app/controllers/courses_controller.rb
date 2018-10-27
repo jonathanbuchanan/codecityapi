@@ -1,6 +1,10 @@
 class CoursesController < ApplicationController
   def index
-    @courses = Course.all
+    if params[:user_id].present?
+      @courses = User.find(params[:user_id]).courses
+    else
+      @courses = Course.all
+    end
     render json: @courses
   end
 
