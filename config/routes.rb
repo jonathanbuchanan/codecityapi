@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :courses, only: [:index]
     post 'enroll', on: :member
     post 'disenroll', on: :member
+    post 'authenticate', on: :collection
   end
 
   resources :courses do

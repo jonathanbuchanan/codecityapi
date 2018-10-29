@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include JsonWebToken
+
   def index
     if params[:course_id].present?
       @users = Course.find(params[:course_id]).users
@@ -42,5 +44,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.courses.delete(@course)
     head :no_content
+  end
+
+  def authenticate
+    @user = User.find_by(email: params[:email])
+    if !@user.authenticate(params[:password])
+      render json: { message: "authentication error" }
+      return
+    end
+    token = encode({ user_id: @user.id }, 2.hours.from_now)
+    render json: {
+      token: token,
+      message: "Successful login."
+    }
   end
 end
