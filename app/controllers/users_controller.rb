@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_request, only: [:update, :destroy, :enroll, :disenroll]
+
   include JsonWebToken
 
   def index

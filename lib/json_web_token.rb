@@ -6,6 +6,6 @@ module JsonWebToken
 
   def decode(token)
     body = JWT.decode(token, Rails.application.secret_key_base)
-    return body[0]
+    return HashWithIndifferentAccess.new(body[0])
   end
 end
